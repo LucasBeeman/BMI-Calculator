@@ -65,7 +65,7 @@
         <Button x:Name="xImportBtn" Content="Import" Grid.Row="6" Grid.Column="4" 
                 Margin="10, 35"/>
         <Button x:Name="xExitBtn" Content="Exit" Grid.Row="6" Grid.Column="6" 
-                Margin="10, 35"/>
+                Margin="10, 35" Click="xExitBtn_Click"/>
         <!--endregion-->
         <!--#region DataGrid-->
         <DataGrid x:Name="xDataGrid" AutoGenerateColumns="True" Grid.Column="1"

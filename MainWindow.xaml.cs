@@ -33,5 +33,10 @@ namespace BMI_Calculator
             xHeightBox.Text = "";
             xWeightBox.Text = "";
         }
+
+        private void xExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+           Close();
+        }
     }
 }
