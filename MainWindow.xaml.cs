@@ -33,8 +33,7 @@ namespace BMI_Calculator
 
             public int CustomBMI(int weight, int height)
             {
-                MessageBox.Show($"Weight: {weight} {weight.GetType()}... height: {height} {height.GetType()}");
-                return weight / (height * height) * 703;
+                return weight * 703 / (height * height);
             }
             public Customer(string LastName, string FirstName, string PhoneNumber, int HeightInches, int WeightLbs )
             {
@@ -71,9 +70,9 @@ namespace BMI_Calculator
             try
             {
                 Customer customerOne = new Customer(xLastNameBox.Text, xFirstNameBox.Text, xPhoneNumberBox.Text, Int32.Parse(xHeightBox.Text), Int32.Parse(xWeightBox.Text));
-                MessageBox.Show($"The customer's name is {customerOne.firstName} {customerOne.lastName} and they can be reached at {customerOne.phoneNumber}. They are {customerOne.heightInches} inches tall. Their weight is {customerOne.weightLbs} lbs.");
+                //MessageBox.Show($"The customer's name is {customerOne.firstName} {customerOne.lastName} and they can be reached at {customerOne.phoneNumber}. They are {customerOne.heightInches} inches tall. Their weight is {customerOne.weightLbs} lbs.");
                 xYourBMIResults.Text = customerOne.custBMI.ToString();
-                MessageBox.Show($"{customerOne.weightLbs} {customerOne.heightInches} {customerOne.custBMI}");
+                //MessageBox.Show($"{customerOne.weightLbs} {customerOne.heightInches} {customerOne.custBMI}");
                 if (customerOne.custBMI < 18.5)
                 {
                     xBMIMessage.Text = "According to CDC.gov BMI Calculator you are" +
@@ -95,7 +94,7 @@ namespace BMI_Calculator
                 else
                 {
                     xBMIMessage.Text = "According to CDC.gov BMI Calculator you are" +
-                        " Obese";
+                        "       Obese";
                     customerOne.statusTitle = "Obese";
                 }
                 xBMIHeader.Text = customerOne.statusTitle;
