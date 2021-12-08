@@ -20,6 +20,34 @@ namespace BMI_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public class Customer
+        {
+            public string lastName { get; set; }
+            public string firstName { get; set; }
+            public string phoneNumber { get; set; }
+            public int heightInches { get; set; }
+            public int weightLbs { get; set; }
+            public int custBMI { get; set; }
+            public string statusTitle { get; set; }
+
+            public int CustomBMI(int weight, int height)
+            {
+                MessageBox.Show($"Weight: {weight} {weight.GetType()}... height: {height} {height.GetType()}");
+                return weight / (height * height) * 703;
+            }
+            public Customer(string LastName, string FirstName, string PhoneNumber, int HeightInches, int WeightLbs )
+            {
+                this.lastName = LastName;
+                this.firstName = FirstName;
+                this.phoneNumber = PhoneNumber;
+                this.heightInches = HeightInches;
+                this.weightLbs = WeightLbs;
+                this.custBMI = CustomBMI(weightLbs, heightInches);
+                statusTitle = "Unknown Error";
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +65,46 @@ namespace BMI_Calculator
         private void xExitBtn_Click(object sender, RoutedEventArgs e)
         {
            Close();
+        }
+        private void xSubmitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Customer customerOne = new Customer(xLastNameBox.Text, xFirstNameBox.Text, xPhoneNumberBox.Text, Int32.Parse(xHeightBox.Text), Int32.Parse(xWeightBox.Text));
+                MessageBox.Show($"The customer's name is {customerOne.firstName} {customerOne.lastName} and they can be reached at {customerOne.phoneNumber}. They are {customerOne.heightInches} inches tall. Their weight is {customerOne.weightLbs} lbs.");
+                xYourBMIResults.Text = customerOne.custBMI.ToString();
+                MessageBox.Show($"{customerOne.weightLbs} {customerOne.heightInches} {customerOne.custBMI}");
+                if (customerOne.custBMI < 18.5)
+                {
+                    xBMIMessage.Text = "According to CDC.gov BMI Calculator you are" +
+                        " underweight";
+                    customerOne.statusTitle = "Underweight";
+                }
+                else if (customerOne.custBMI < 24.9)
+                {
+                    xBMIMessage.Text = "According to CDC.gov BMI Calculator you are of" +
+                        " healthy weight";
+                    customerOne.statusTitle = "Healthy";
+                }
+                else if (customerOne.custBMI < 29.9)
+                {
+                    xBMIMessage.Text = "According to CDC.gov BMI Calculator you are" +
+                        " overweight";
+                    customerOne.statusTitle = "Overweight";
+                }
+                else
+                {
+                    xBMIMessage.Text = "According to CDC.gov BMI Calculator you are" +
+                        " Obese";
+                    customerOne.statusTitle = "Obese";
+                }
+                xBMIHeader.Text = customerOne.statusTitle;
+            }
+            catch
+            {
+                MessageBox.Show("Invalid information... Try again.");
+            }
+                
         }
     }
 }
